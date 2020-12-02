@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home Page</title>
+    <!-- Import our custom stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <title>Grover Rental</title>
+    <h1>Grover MarketPlace</h1>
+    
+    <style>
+        table, th, td { border: 1px solid black; text-align: center; white-space: nowrap;}         
+        td.numeric, th.numeric { text-align: right; }
+        section {padding-top: 40px;}
+      </style>
+</head>
+
+<body>
+    <div>
+
+        <table border="1" cellpadding="5" cellspacing="5">
+            {% for row in products %}
+                <tr>
+                {% for d in row %}
+                    <td>{{ d }}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    <!-- <table>
+        <tr>
+            {% for header in headings %}
+            <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for cell in row %}
+            <td>{{ cell }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+
+    </table> -->
+</div>
+</body>
+
+</html>
