@@ -44,7 +44,7 @@ def home():
     return redirect('/store/Grover-de')
 
 @app.route('/store/Grover-de')
-def home():
+def grover-de():
     """
     Grover DE Page
     """
