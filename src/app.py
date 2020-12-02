@@ -49,7 +49,7 @@ def groverde():
     Grover DE Page
     """
     products= fetchdata('Grover-de')
-    render_template("homepage.html", products=products)
+    return render_template("homepage.html", products=products)
 
 def fetchdata(store):
     data=""
