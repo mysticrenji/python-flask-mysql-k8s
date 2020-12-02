@@ -1,8 +1,3 @@
-"""
-Simple Python App to demonstrate delpoyment using GKE
-This app will run in one container and will connect
-with MySQL database running as another container using service name
-"""
 
 from flask import Flask, request
 app = Flask(__name__)
@@ -14,7 +9,6 @@ def get_db_conn(host, user, passwd, db):
     """
     Get connection to MySQL database
     """
-
     global conn
     if not conn.open:
         conn = MySQLdb.connect(host=host, user=user, passwd=passwd, db=db)
@@ -46,7 +40,7 @@ def greet():
     Greet to visitors of url http://IP:5000/
     """
 
-    return 'Valar Morghulis!!'
+    return 'Hello folks.'
 
 
 @app.route("/storedata", methods=["POST"])

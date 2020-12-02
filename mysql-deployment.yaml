@@ -15,14 +15,21 @@ spec:
         app: mysql-flask
     spec:
       containers:
-      - env:
-        - name: MYSQL_DATABASE
-          value: admin
-        - name: MYSQL_ROOT_PASSWORD
-          value: admin
-        image: mysql:latest
-        name: mysql-flask
-        ports:
-        - name: mysqlport
-          containerPort: 3306
-          protocol: TCP
+        - env:
+            - name: MYSQL_DATABASE
+              value: admin
+            - name: MYSQL_ROOT_PASSWORD
+              value: admin
+          image: mysql:latest
+          name: mysql-flask
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "512Mi"
+            limits:
+               cpu: "100m"
+               memory: "512Mi"
+          ports:
+            - name: mysqlport
+              containerPort: 3306
+              protocol: TCP
