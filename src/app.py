@@ -31,9 +31,9 @@ def db_init(host, user, passwd, db):
             conn.commit()
             conn.close()
         else:
-            print "Database table already present"
+            print ("Database table already present")
     except Exception as msg:
-        print "Exception while initializing database : %s"%msg
+        print ("Exception while initializing database : %s"%msg)
 
 
 @app.route('/')
@@ -44,14 +44,39 @@ def home():
     return redirect('/store/Grover-de')
 
 @app.route('/store/Grover-de')
-def groverde():
+def grover_de():
     """
     Grover DE Page
     """
     products= fetchdata('Grover-de')
     return render_template("homepage.html", products=products)
 
-def fetchdata(store):
+@app.route('/store/mm-Berlin')
+def mm_berlin():
+    """
+    Grover Berlin Page
+    """
+    products= fetchdata('mm-Berlin')
+    return render_template("homepage.html", products=products)
+
+
+@app.route('/api/Grover-de')
+def api_grover_de():
+    """
+    Grover DE Page
+    """
+    products= fetch_data('mm-Berlin')
+    return (json.dumps(products,indent=4)) 
+
+@app.route('/api/mm-Berlin')
+def api_mm_berlin():
+    """
+    Grover Berlin Page
+    """
+    products= fetch_data('mm-Berlin')
+    return (json.dumps(products,indent=4)) 
+
+def fetch_data(store):
     data=""
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
@@ -62,7 +87,7 @@ def fetchdata(store):
             return data
         conn.close()
     except Exception as msg:
-        print "Exception : %s"%(msg)
+        print ("Exception : %s"%(msg))
         msg = "Exception while fetching data %s"%(msg)
     return data
 
