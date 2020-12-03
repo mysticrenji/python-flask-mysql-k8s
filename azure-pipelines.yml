@@ -27,4 +27,32 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: 'latest'
+    - task: KubectlInstaller@0
+      inputs:
+        kubectlVersion: 'latest'
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'Linode-K8s'
+        namespace: 'default'
+        command: 'delete'
+        useConfigurationFile: true
+        configuration: '$(Build.SourcesDirectory)/testapp-deployment.yaml'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Container Registry'
+        dockerRegistryEndpoint: 'DockerHub'
+        forceUpdate: false
+    
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'Linode-K8s'
+        namespace: 'default'
+        command: 'create'
+        useConfigurationFile: true
+        configuration: '$(Build.SourcesDirectory)/testapp-deployment.yaml'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Container Registry'
+        dockerRegistryEndpoint: 'DockerHub'
+        forceUpdate: false
     
