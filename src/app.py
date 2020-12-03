@@ -81,10 +81,28 @@ def fetch_data(store):
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-        cur.execute("SELECT productname,brand,category,stockstatus,quantity FROM products where store=%s"%store)
+        cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"%store)
         if cur.rowcount:
             data = cur.fetchall()
             return data
+        conn.close()
+    except Exception as msg:
+        print ("Exception : %s"%(msg))
+        msg = "Exception while fetching data %s"%(msg)
+    return data
+
+def insert_data(store):
+    data=""
+    try:
+        conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
+        cur = conn.cursor()
+        sql = "INSERT INTO customers (productname, brand,category,stockstatus,store,quantity) VALUES (%s, %s, %s, %s, %s, %d)"
+        val1 = ("Iphone", "Apple","Phones","In Stock","Grover-de", 10)
+        cur.execute(sql, val1)
+        val2 = ("Galaxy A4", "Samsung","Phones","In Stock","mm-Berlin", 10)
+        cur.execute(sql, val2)
+        conn.commit()
+        print(cur.rowcount, "Record inserted successfully into Inventory table")
         conn.close()
     except Exception as msg:
         print ("Exception : %s"%(msg))
