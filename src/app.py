@@ -77,11 +77,12 @@ def api_mm_berlin():
     return (json.dumps(products,indent=4)) 
 
 def fetch_data(store):
-    data=""
+    #data=""
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-        cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"%store)
+        #cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"%store)
+        cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products")
         if cur.rowcount:
             data = cur.fetchall()
             return data
