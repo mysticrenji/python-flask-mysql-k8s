@@ -27,4 +27,9 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: 'latest'
-    
+    - task: KubernetesManifest@0
+      inputs:
+        action: 'deploy'
+        kubernetesServiceConnection: 'Linode-K8s'
+        namespace: 'default'
+        manifests: '$(Build.SourcesDirectory)/testapp-deployment'
