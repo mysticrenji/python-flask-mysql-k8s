@@ -25,9 +25,9 @@ def db_init(host, user, passwd, db):
     try:
         conn = MySQLdb.connect(host=host, user=user, passwd=passwd, db=db)
         cur=conn.cursor()
-        cur.execute("show tables like 'inventory'")
+        cur.execute("show tables like 'products'")
         if not cur.rowcount:
-            cur.execute("create table inventory(id INT(10) NOT NULL AUTO_INCREMENT, productname VARCHAR(30) NOT NULL, brand VARCHAR(30) NOT NULL,category VARCHAR(30) NOT NULL, stockstatus VARCHAR(30) NOT NULL, store VARCHAR(30) NOT NULL, quantity INT(10) NOT NULL, CONSTRAINT id_pk PRIMARY KEY (id),CONSTRAINT uk UNIQUE(productname,store))")
+            cur.execute("create table products(id INT(10) NOT NULL AUTO_INCREMENT, productname VARCHAR(30) NOT NULL, brand VARCHAR(30) NOT NULL,category VARCHAR(30) NOT NULL, stockstatus VARCHAR(30) NOT NULL, store VARCHAR(30) NOT NULL, quantity INT(10) NOT NULL, CONSTRAINT id_pk PRIMARY KEY (id),CONSTRAINT uk UNIQUE(productname,store))")
             conn.commit()
             conn.close()
         else:
@@ -95,13 +95,13 @@ def insert_data():
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-        sql = "INSERT INTO customers (productname, brand,category,stockstatus,store,quantity) VALUES (%s, %s, %s, %s, %s, %s, %d)"
+        sql = ("INSERT INTO products (productname, brand,category,stockstatus,store,quantity) VALUES (%s, %s, %s, %s, %s, %d)")
         val1 = ("Iphone", "Apple","Phones","In Stock","Grover-de", 10)
         cur.execute(sql, val1)
         val2 = ("Galaxy A4", "Samsung","Phones","In Stock","mm-Berlin", 10)
         cur.execute(sql, val2)
         conn.commit()
-        print(cur.rowcount, "Record inserted successfully into Inventory table")
+        print(cur.rowcount, "Record inserted successfully into products table")
         conn.close()
     except Exception as msg:
         print ("Exception : %s"%(msg))
