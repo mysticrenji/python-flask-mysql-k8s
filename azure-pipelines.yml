@@ -32,4 +32,4 @@ stages:
         action: 'deploy'
         kubernetesServiceConnection: 'Linode-K8s'
         namespace: 'default'
-        manifests: '$(Build.SourcesDirectory)/testapp-deployment'
+        manifests: '$(Build.SourcesDirectory)/testapp-deployment.yaml'
