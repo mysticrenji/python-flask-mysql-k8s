@@ -95,8 +95,8 @@ def insert_data():
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-        sql = ("INSERT INTO products (productname, brand,category,stockstatus,store,quantity) VALUES (%s, %s, %s, %s, %s, %d)")
-        val1 = ("Iphone", "Apple","Phones","In Stock","Grover-de", 10)
+        sql = ("INSERT INTO products (id,productname, brand,category,stockstatus,store,quantity) VALUES (%d, %s, %s, %s, %s, %s, %d)")
+        val1 = (1,"Iphone", "Apple","Phones","In Stock","Grover-de", 10)
         cur.execute(sql, val1)
         val2 = ("Galaxy A4", "Samsung","Phones","In Stock","mm-Berlin", 10)
         cur.execute(sql, val2)
