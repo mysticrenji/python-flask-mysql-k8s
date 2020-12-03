@@ -81,7 +81,8 @@ def fetch_data(store):
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-        cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"%store)
+        sql="""SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"""
+        cur.execute(sql,store)
         if cur.rowcount:
             data = cur.fetchall()
             return data
@@ -89,7 +90,7 @@ def fetch_data(store):
     except Exception as msg:
         print ("Exception : %s"%(msg))
         msg = "Exception while fetching data %s"%(msg)
-    return data
+    
 
 def insert_data():
     try:
