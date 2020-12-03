@@ -48,7 +48,7 @@ def grover_de():
     """
     Grover DE Page
     """
-    products= fetchdata('Grover-de')
+    products= fetch_data('Grover-de')
     return render_template("homepage.html", products=products)
 
 @app.route('/store/mm-Berlin')
@@ -56,7 +56,7 @@ def mm_berlin():
     """
     Grover Berlin Page
     """
-    products= fetchdata('mm-Berlin')
+    products= fetch_data('mm-Berlin')
     return render_template("homepage.html", products=products)
 
 
