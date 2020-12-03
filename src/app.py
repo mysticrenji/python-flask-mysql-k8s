@@ -77,12 +77,11 @@ def api_mm_berlin():
     return (json.dumps(products,indent=4)) 
 
 def fetch_data(store):
-    #data=""
+    
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-        #cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"%store)
-        cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products")
+        cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"%store)
         if cur.rowcount:
             data = cur.fetchall()
             return data
@@ -97,10 +96,13 @@ def insert_data():
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
         sql1 = ("INSERT INTO products (id,productname, brand,category,stockstatus,store,quantity) VALUES (1,\"Iphone\", \"Apple\",\"Phones\",\"In Stock\",\"Grover-de\", 10)")
-        #val1 = (1,"Iphone", "Apple","Phones","In Stock","Grover-de", 10)
         cur.execute(sql1)
-        # val2 = ("Galaxy A4", "Samsung","Phones","In Stock","mm-Berlin", 10)
-        # cur.execute(sql, val2)
+        sql2 = ("INSERT INTO products (id,productname, brand,category,stockstatus,store,quantity) VALUES (2,\"GalaxyA4\", \"Samsung\",\"Phones\",\"Out Of Stock\",\"Grover-de\", 0)")
+        cur.execute(sql2)
+        sql3 = ("INSERT INTO products (id,productname, brand,category,stockstatus,store,quantity) VALUES (3,\"Huawei\", \"Apple\",\"Phones\",\"In Stock\",\"mm-Berlin\", 10)")
+        cur.execute(sql3)
+        sql4 = ("INSERT INTO products (id,productname, brand,category,stockstatus,store,quantity) VALUES (4,\"Iphone\", \"Apple\",\"Phones\",\"Out Of Stock\",\"mm-Berlin\", 0)")
+        cur.execute(sql4)
         conn.commit()
         print(cur.rowcount, "Record inserted successfully into products table")
         conn.close()
@@ -108,45 +110,6 @@ def insert_data():
         print ("Exception : %s"%(msg))
         msg = "Exception while fetching data %s"%(msg)
     
-
-# @app.route("/storedata", methods=["POST"])
-# def store_data():
-#     """
-#     Store the employee data in database and return msg
-#     """
-
-#     try:
-#         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
-#         cur = conn.cursor()
-#         cur.execute("insert into employee values (%s, '%s')"%(request.form['id'], request.form['name']))
-#         conn.commit()
-#         msg = "Inserted Data for Employee : %s"%(request.form['name'])
-#     except Exception as msg:
-#         print "Exception : %s"%(msg)
-#         msg = "Exception while inserting data %s"%(msg)
-#     return msg
-
-
-# @app.route("/getdata/<int:id>", methods=["GET"])
-# def get_data(id):
-#     """
-#     Get Employee data using Employee ID
-#     """
-
-#     try:
-#         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
-#         cur = conn.cursor()
-#         cur.execute("select * from employee where id=%d"%id)
-#         if cur.rowcount:
-#             res = cur.fetchone()
-#             msg = "Employee Details ID : %d  Name : %s"%(res[0], res[1])
-#         else:
-#             msg = "Data for Employee ID : %d not present"%(id)
-#     except Exception as msg:
-#         print "Exception : %s"%(msg)
-#         msg = "Exception while fetching data %s"%(msg)
-#     return msg
-
 
 if __name__ == '__main__':
     db_init(host="mysql-service.default", user="root", passwd="admin", db="admin")
