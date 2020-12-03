@@ -91,8 +91,7 @@ def fetch_data(store):
         msg = "Exception while fetching data %s"%(msg)
     return data
 
-def insert_data(store):
-    data=""
+def insert_data():
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
@@ -107,7 +106,7 @@ def insert_data(store):
     except Exception as msg:
         print ("Exception : %s"%(msg))
         msg = "Exception while fetching data %s"%(msg)
-    return data
+    
 
 # @app.route("/storedata", methods=["POST"])
 # def store_data():
@@ -150,4 +149,5 @@ def insert_data(store):
 
 if __name__ == '__main__':
     db_init(host="mysql-service.default", user="root", passwd="admin", db="admin")
+    insert_data()
     app.run(host="0.0.0.0", port=5000)
