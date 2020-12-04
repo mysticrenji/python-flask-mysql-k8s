@@ -81,8 +81,8 @@ def fetch_data(store):
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-        sql="""SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"""
-        cur.execute(sql,store)
+       # sql"SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"
+        cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s",store)
         if cur.rowcount:
             data = cur.fetchall()
             return data
