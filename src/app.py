@@ -81,8 +81,7 @@ def fetch_data(store):
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-       # sql"SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s"
-        cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products where store=%s",store)
+        cur.execute("SELECT productname,brand,category,stockstatus,store,quantity FROM products")
         if cur.rowcount:
             data = cur.fetchall()
             return data
@@ -96,8 +95,8 @@ def insert_data():
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-        sql = "INSERT INTO products (productname, brand, category,stockstatus,store,quantity) VALUES(%s, %s, %s,%s,%s,%d)"
-        data =("Galaxy", "Samsung","Phones","Out of Stock","Grover-de", 10)
+        sql = "INSERT INTO products(id,productname, brand, category,stockstatus,store,quantity) VALUES(%d,%s, %s, %s,%s,%s,%d)"
+        data =(2,"Galaxy", "Samsung","Phones","Out of Stock","Grover-de", 10)
         cur.execute(sql,data)
         conn.commit()
         print(cur.rowcount, "Record inserted successfully into products table")
