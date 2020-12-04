@@ -96,14 +96,9 @@ def insert_data():
     try:
         conn = get_db_conn(host="mysql-service.default", user="root", passwd="admin", db="admin")
         cur = conn.cursor()
-        sql1 = ("INSERT INTO products (id,productname, brand,category,stockstatus,store,quantity) VALUES (1,\"Iphone\", \"Apple\",\"Phones\",\"In Stock\",\"Grover-de\", 10)")
-        cur.execute(sql1)
-        sql2 = ("INSERT INTO products (id,productname, brand,category,stockstatus,store,quantity) VALUES (2,\"GalaxyA4\", \"Samsung\",\"Phones\",\"Out Of Stock\",\"Grover-de\", 0)")
-        cur.execute(sql2)
-        sql3 = ("INSERT INTO products (id,productname, brand,category,stockstatus,store,quantity) VALUES (3,\"Huawei\", \"Apple\",\"Phones\",\"In Stock\",\"mm-Berlin\", 10)")
-        cur.execute(sql3)
-        sql4 = ("INSERT INTO products (id,productname, brand,category,stockstatus,store,quantity) VALUES (4,\"Iphone\", \"Apple\",\"Phones\",\"Out Of Stock\",\"mm-Berlin\", 0)")
-        cur.execute(sql4)
+        sql = "INSERT INTO products (productname, brand, category,stockstatus,store,quantity) VALUES(%s, %s, %s,%s,%s,%d)"
+        data =("Galaxy", "Samsung","Phones","Out of Stock","Grover-de", 10)
+        cur.execute(sql,data)
         conn.commit()
         print(cur.rowcount, "Record inserted successfully into products table")
         conn.close()
