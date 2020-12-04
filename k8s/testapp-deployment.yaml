@@ -37,10 +37,10 @@ spec:
                 secretKeyRef:
                   name: mysql-secrets
                   key: DB                  
-          resources:
-            requests:
-              cpu: "250m"
-              memory: "64Mi"
-            limits:
-               cpu: "250m"
-               memory: "64Mi"
+          # resources:
+          #   requests:
+          #     cpu: "250m"
+          #     memory: "64Mi"
+          #   limits:
+          #      cpu: "250m"
+          #      memory: "64Mi"
