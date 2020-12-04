@@ -30,10 +30,20 @@ spec:
     spec:
       containers:
         - env:
+            # - name: MYSQL_DATABASE
+            #   value: admin
+            # - name: MYSQL_ROOT_PASSWORD
+            #   value: admin
             - name: MYSQL_DATABASE
-              value: admin
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: DB_USER
             - name: MYSQL_ROOT_PASSWORD
-              value: admin
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: DB_PASS              
           image: mysql:latest
           name: mysql-flask
           resources:

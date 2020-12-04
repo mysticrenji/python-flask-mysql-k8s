@@ -18,7 +18,7 @@ def get_db_conn(host, user, passwd, db):
 
 def db_init(host, user, passwd, db):
     """
-    Initialize the database by creating employee table
+    Initialize the database by creating products table
     """
 
     global conn
@@ -107,6 +107,9 @@ def insert_data():
     
 
 if __name__ == '__main__':
-    db_init(host="mysql-service.default", user="root", passwd="admin", db="admin")
+    USER = os.getenv('DB_USER')
+    PASSWORD = os.environ.get('DB_PASS')
+    DB=os.environ.get('DB')
+    db_init(host="mysql-service.default", user=USER, passwd=PASSWORD, db=DB)
     insert_data()
     app.run(host="0.0.0.0", port=5000)

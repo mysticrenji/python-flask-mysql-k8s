@@ -8,6 +8,9 @@
     `kubectl create -f mysql-service.yaml`  
     `kubectl create -f testapp-service.yaml`
 
+2. Create secrets,  
+    `kubectl create -f mysql-secrets.yaml`  
+
 2. Create deployments,  
     `kubectl create -f mysql-deployment.yaml`  
     `kubectl create -f testapp-deployment.yaml`

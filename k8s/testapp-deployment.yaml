@@ -21,10 +21,26 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
-          # resources:
-          #   requests:
-          #     cpu: "100m"
-          #     memory: "256Mi"
-          #   limits:
-          #      cpu: "100m"
-          #      memory: "256Mi"
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: DB_USER
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: DB_PASS
+            - name: DB
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: DB                  
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "64Mi"
+            limits:
+               cpu: "250m"
+               memory: "64Mi"
