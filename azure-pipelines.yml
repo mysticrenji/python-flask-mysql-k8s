@@ -37,7 +37,7 @@ stages:
         namespace: 'default'
         command: 'delete'
         useConfigurationFile: true
-        configuration: '$(Build.SourcesDirectory)/testapp-deployment.yaml'
+        configuration: '$(Build.SourcesDirectory)/k8s/testapp-deployment.yaml'
         secretType: 'dockerRegistry'
         containerRegistryType: 'Container Registry'
         dockerRegistryEndpoint: 'DockerHub'
@@ -51,7 +51,7 @@ stages:
         namespace: 'default'
         command: 'create'
         useConfigurationFile: true
-        configuration: '$(Build.SourcesDirectory)/testapp-deployment.yaml'
+        configuration: '$(Build.SourcesDirectory)/k8s/testapp-deployment.yaml'
         secretType: 'dockerRegistry'
         containerRegistryType: 'Container Registry'
         dockerRegistryEndpoint: 'DockerHub'
