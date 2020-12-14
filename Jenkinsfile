@@ -24,6 +24,12 @@ pipeline {
       }
     }
 
+    stage('Waiting for approval') {
+      steps {
+        input(message: 'Please approve', ok: 'Lets do it!')
+      }
+    }
+
   }
   environment {
     Hello = 'Welcome to Jenkins'
