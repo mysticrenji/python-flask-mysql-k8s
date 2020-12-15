@@ -2,19 +2,8 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            sh 'echo $Hello'
-          }
-        }
-
-        stage('Docker Check') {
-          steps {
-            sh 'docker ps'
-          }
-        }
-
+      steps {
+        sh 'echo $Hello'
       }
     }
 
